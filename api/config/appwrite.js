@@ -1,4 +1,4 @@
-import { Client, Account, Storage} from "appwrite";
+import { Client, Account, Storage} from "node-appwrite";
 import { configDotenv } from 'dotenv'
 configDotenv() // this for env access all ove
 
