@@ -1,13 +1,15 @@
 import express from 'express'
 import { createListing, deleteListing, getListing, getListings, updateListing } from '../Controllers/listing.controller.js'
 import { verifyToken } from '../utils/verify.User.js'
+import { checkApikey } from '../middleware/verifyApikey.js'
+import { CheckRateLimit } from '../middleware/verifyRateLimit.js'
 
 const router = express.Router()
 
-router.route('/create').post(verifyToken,createListing)
-router.route('/delete/:id').delete(verifyToken,deleteListing)
-router.route('/update/:id').post(verifyToken,updateListing)
-router.route('/get/:id').get(getListing)
-router.route('/get').get(getListings)
+router.route('/create').post(checkApikey,CheckRateLimit,verifyToken,createListing)
+router.route('/delete/:id').delete(checkApikey,CheckRateLimit,verifyToken,deleteListing)
+router.route('/update/:id').post(checkApikey,CheckRateLimit,verifyToken,updateListing)
+router.route('/get/:id').get(checkApikey,CheckRateLimit,getListing)
+router.route('/get').get(checkApikey,CheckRateLimit,getListings)
 
 export default router
