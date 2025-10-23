@@ -10,9 +10,20 @@ configDotenv() // this for env access all ove
 
 // const { Client, Storage, ID } = sdk;
 
-const createListing = async (req, res, next) => {
+
+const fileupload = async (req, res, next) => {
 
   try {
+
+    const { buffer, originalname } = req.file
+
+    console.log(req.file)
+
+    if (!req.file) {
+      return res.status(400).json("File not found");
+    }
+
+
 
     const filePath = req.file.path;
     const fileName = req.file.originalname;
@@ -32,30 +43,24 @@ const createListing = async (req, res, next) => {
 
     const fileUrl = `${process.env.APPWRITE_ENDPOINT}/storage/buckets/${process.env.APPWRITE_BUCKET_ID}/files/${uploadedFile.$id}/view?project=${process.env.APPWRITE_PROJECT_ID}`;
 
+    return res.status(201).json(
+      fileUrl
+    );
+
+
+  } catch (error) {
+
+  }
+
+}
+
+const createListing = async (req, res, next) => {
+
+  try {
+
     // const listing = await Listing.create(req.body);
 
-    const listing = await Listing.create({
-
-      name: req.body.name,
-      description: req.body.description,
-      address: req.body.address,
-      regularPrice: req.body.regularPrice,
-      discountedPrice: req.body.discountedPrice,
-      bathrooms: req.body.bathrooms,
-      bedrooms: req.body.bedrooms,
-      furnished: req.body.furnished,
-      parking: req.body.parking,
-      wifi: req.body.wifi,
-      type: req.body.type,
-      offer: req.body.offer,
-      imageUrl: fileUrl,
-      userRef: req.body.userRef,
-      email: req.body.email,
-      phonenumber: req.body.phonenumber,
-      whatsapp: req.body.whatsapp,
-
-    });
-    return res.status(201).json(listing);
+  
     // return res.status(201).json(
     //   "hello"
     // );
@@ -191,4 +196,4 @@ const getListings = async (req, res, next) => {
   }
 }
 
-export { createListing, deleteListing, updateListing, getListing, getListings }
+export { fileupload, createListing, deleteListing, updateListing, getListing, getListings }
