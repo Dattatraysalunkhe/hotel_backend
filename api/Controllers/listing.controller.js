@@ -6,6 +6,7 @@ import { storage } from "../config/appwrite.js";
 import { InputFile } from "node-appwrite/file"; // <--- Correct import here
 
 import { configDotenv } from 'dotenv'
+import { apiResponce } from "../utils/apiResponce.js";
 configDotenv() // this for env access all ove
 
 // const { Client, Storage, ID } = sdk;
@@ -19,7 +20,7 @@ const fileupload = async (req, res, next) => {
 
     console.log(req.file)
 
-    if (!req.file) {
+    if (!req.file || !req.file.buffer) {
       return res.status(400).json("File not found");
     }
 
@@ -39,16 +40,24 @@ const fileupload = async (req, res, next) => {
       InputFile.fromBuffer(req.file.buffer, req.file.originalname)
     );
 
-    console.log("*******", uploadedFile)
 
     const fileUrl = `${process.env.APPWRITE_ENDPOINT}/storage/buckets/${process.env.APPWRITE_BUCKET_ID}/files/${uploadedFile.$id}/view?project=${process.env.APPWRITE_PROJECT_ID}`;
 
-    return res.status(201).json(
-      fileUrl
-    );
+
+    return res
+      .status(201)
+      .json(
+        new apiResponce(
+          400,
+          fileUrl,
+          "File is uploaded"
+        )
+      )
 
 
   } catch (error) {
+
+    console.log(error)
 
   }
 
@@ -60,7 +69,7 @@ const createListing = async (req, res, next) => {
 
     // const listing = await Listing.create(req.body);
 
-  
+
     // return res.status(201).json(
     //   "hello"
     // );
