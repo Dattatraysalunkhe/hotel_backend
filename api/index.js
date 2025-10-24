@@ -23,7 +23,7 @@ const app = express()
 //   credentials: true
 // }));
 
-const port = 3000
+const port = process.env.PORT || 5000
 
 app.use(express.json())   // where we can req.body somthing rquesting in json format he never giving problem
 
