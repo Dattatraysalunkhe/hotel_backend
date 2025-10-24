@@ -2,10 +2,11 @@ import rateLimit from "express-rate-limit"
 
 
 const CheckRateLimit = rateLimit({
-    windowMs:30 * 60 * 1000,  // 15 minutes
-    max:10,
+    windowMs: 30 * 60 * 1000,  // 15 minutes
+    // max:10,
+    max: 50,
     message: "Too many requests, please try again later."
 })
 
 
-export {CheckRateLimit}
+export { CheckRateLimit }
