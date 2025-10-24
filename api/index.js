@@ -17,6 +17,12 @@ const __dirname = path.resolve();
 
 const app = express()
 
+// app.use(cors({
+//   origin: "https://skyhotel.com", // Only allow this domain
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
+
 const port = 3000
 
 app.use(express.json())   // where we can req.body somthing rquesting in json format he never giving problem
