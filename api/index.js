@@ -4,6 +4,7 @@ import { DB_NAME } from './constant.js'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import path from 'path'
+import cors from 'cors';
 
 dotenv.config();
 
@@ -17,11 +18,11 @@ const __dirname = path.resolve();
 
 const app = express()
 
-// app.use(cors({
-//   origin: "https://skyhotel.com", // Only allow this domain
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
+app.use(cors({
+  origin: "https://skyhotel.onrender.com", // Only allow this domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 const port = process.env.PORT || 5000
 
