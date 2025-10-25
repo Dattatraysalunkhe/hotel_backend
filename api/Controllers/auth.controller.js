@@ -52,8 +52,8 @@ const signin = async (req,res,next) => {
                httpOnly:true,         // for production
                secure:true,           // for production
                // secure:false,       // for local
-               sameSite: 'lax', // or 'none' if using cross-site cookies
-               // sameSite: 'none' // ✅ allows cross-origin cookies
+               // sameSite: 'lax', // or 'none' if using cross-site cookies
+               sameSite: 'none' // ✅ allows cross-origin cookies
           })
           .status(200)
           .json(loginUser)
