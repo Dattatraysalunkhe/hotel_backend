@@ -22,9 +22,12 @@ const app = express()
 
 app.use(cors({
   origin: "https://skyhotel.onrender.com", // Only allow this domain
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE","OPTIONS"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "x-api-key"],
 }));
+
+app.options('*', cors());
 
 // for local code
 
