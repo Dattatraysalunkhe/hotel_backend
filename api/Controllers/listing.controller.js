@@ -18,7 +18,7 @@ const fileupload = async (req, res, next) => {
 
     const { buffer, originalname } = req.file
 
-    console.log(req.file)
+    // console.log(req.file)
 
     if (!req.file || !req.file.buffer) {
       return res.status(400).json("File not found");

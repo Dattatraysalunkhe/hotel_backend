@@ -18,17 +18,21 @@ const __dirname = path.resolve();
 
 const app = express()
 
-// app.use(cors({
-//   origin: "https://skyhotel.onrender.com", // Only allow this domain
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
+// for production code 
 
 app.use(cors({
-  origin: "http://localhost:5173", // Only allow this domain
+  origin: "https://skyhotel.onrender.com", // Only allow this domain
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
+// for local code
+
+// app.use(cors({
+//   origin: "http://localhost:5173", // Only allow this domain
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
 
 const port = process.env.PORT || 5000
 

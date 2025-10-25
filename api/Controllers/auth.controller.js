@@ -49,8 +49,9 @@ const signin = async (req,res,next) => {
         const loginUser = await User.findById(validUser._id).select("-password")
           
           res.cookie('access_token',token,{
-               httpOnly:true,
-               secure:false,
+               httpOnly:true,         // for production
+               secure:true,           // for production
+               // secure:false,       // for local
                sameSite: 'lax', // or 'none' if using cross-site cookies
                // sameSite: 'none' // ✅ allows cross-origin cookies
           })
